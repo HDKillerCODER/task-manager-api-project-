@@ -1,3 +1,39 @@
+-- Disable foreign key checks
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- Create the tables
+CREATE TABLE Artist (
+    ArtistId INT PRIMARY KEY,
+    Name VARCHAR(255)
+);
+
+CREATE TABLE Genre (
+    GenreId INT PRIMARY KEY,
+    Name VARCHAR(255)
+);
+
+CREATE TABLE Album (
+    AlbumId INT PRIMARY KEY,
+    Title VARCHAR(255),
+    ArtistId INT,
+    FOREIGN KEY (ArtistId) REFERENCES Artist(ArtistId)
+);
+
+CREATE TABLE Track (
+    TrackId INT PRIMARY KEY,
+    AlbumId INT,
+    GenreId INT,
+    Composer VARCHAR(255),
+    FOREIGN KEY (AlbumId) REFERENCES Album(AlbumId),
+    FOREIGN KEY (GenreId) REFERENCES Genre(GenreId)
+);
+
+-- Re-enable foreign key checks
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+
+
 // const express = require("express");
 // const app = express();
 
