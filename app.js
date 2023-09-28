@@ -1,3 +1,19 @@
+SELECT A.Title AS AlbumTitle, COUNT(T.TrackId) AS NoOfTracks
+FROM Album A
+LEFT JOIN Track T ON A.AlbumId = T.AlbumId
+GROUP BY A.AlbumId, A.Title
+ORDER BY NoOfTracks ASC;
+
+
+SELECT A.Name AS ArtistName, AL.Title AS AlbumTitle
+FROM Artist A
+INNER JOIN Album AL ON A.ArtistId = AL.ArtistId
+WHERE A.Name LIKE '%m'
+ORDER BY A.Name;
+
+
+
+
 -- Disable foreign key checks
 SET FOREIGN_KEY_CHECKS = 0;
 
