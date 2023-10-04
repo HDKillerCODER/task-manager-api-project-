@@ -1,70 +1,71 @@
--- Create Employee table
-CREATE TABLE Employee (
-    Empld INT PRIMARY KEY,
-    Empname VARCHAR(50),
-    Sal DECIMAL(10, 2),
-    Deptno INT
+-- Create Voter table
+CREATE TABLE Voter (
+    Voterld INT PRIMARY KEY,
+    Votername VARCHAR(50),
+    Address VARCHAR(100),
+    Gender CHAR(1),
+    Age INT
 );
 
--- Create Dept table
-CREATE TABLE Dept (
-    Deptno INT PRIMARY KEY,
-    Dname VARCHAR(50),
-    Loc VARCHAR(50),
-    Deptmanagerld INT
+-- Create Booth table
+CREATE TABLE Booth (
+    Boothid INT PRIMARY KEY,
+    BIncharge VARCHAR(50),
+    Location VARCHAR(100)
 );
 
--- Create EmpDept table
-CREATE TABLE EmpDept (
-    Empld INT,
-    Deptno INT,
-    FOREIGN KEY (Empld) REFERENCES Employee(Empld),
-    FOREIGN KEY (Deptno) REFERENCES Dept(Deptno)
+-- Create VoterBooth table
+CREATE TABLE VoterBooth (
+    Voterld INT,
+    Boothid INT,
+    Checkvote INT,
+    FOREIGN KEY (Voterld) REFERENCES Voter(Voterld),
+    FOREIGN KEY (Boothid) REFERENCES Booth(Boothid)
 );
 
--- a) List the Department number and Employee count of each department.
-SELECT d.Deptno, COUNT(e.Empld) AS EmployeeCount
-FROM Dept d
-LEFT JOIN EmpDept ed ON d.Deptno = ed.Deptno
-LEFT JOIN Employee e ON ed.Empld = e.Empld
-GROUP BY d.Deptno;
+-- a) Display the Voter details of Booth with id 2010.
+SELECT v.*
+FROM Voter v
+JOIN VoterBooth vb ON v.Voterld = vb.Voterld
+WHERE vb.Boothid = 2010;
 
--- b) List the employeename, department number, and the salary of all the employees.
-SELECT e.Empname, ed.Deptno, e.Sal
-FROM Employee e
-JOIN EmpDept ed ON e.Empld = ed.Empld;
+-- b) List the Boothid and number of voters in each Booth.
+SELECT vb.Boothid, COUNT(*) AS VoterCount
+FROM VoterBooth vb
+GROUP BY vb.Boothid;
 
--- c) Create a view to display the Department name in which "Rani" is working.
-CREATE VIEW RaniDepartment AS
-SELECT d.Dname
-FROM Dept d
-JOIN EmpDept ed ON d.Deptno = ed.Deptno
-JOIN Employee e ON ed.Empld = e.Empld
-WHERE e.Empname = 'Rani';
+-- c) Display the overall count of voters voted in the election.
+SELECT COUNT(*) AS VotedCount
+FROM VoterBooth
+WHERE Checkvote = 1;
 
--- d) Display the Department number of Manufacturing department.
-SELECT Deptno FROM Dept WHERE Dname = 'Manufacturing';
+-- d) Display the Boothid in which "Geetha" has to vote.
+SELECT vb.Boothid
+FROM Voter v
+JOIN VoterBooth vb ON v.Voterld = vb.Voterld
+WHERE v.Votername = 'Geetha';
 
--- e) Create a function to return the salary of the employee when Empid is given as input parameter.
+-- e) Write a function to return the Votername if Voterld is given.
 DELIMITER //
-CREATE FUNCTION GetEmployeeSalary(Employee_ID INT)
-RETURNS DECIMAL(10, 2)
+CREATE FUNCTION GetVoterNameByVoterID(Voter_ID INT)
+RETURNS VARCHAR(50)
 BEGIN
-    DECLARE EmployeeSalary DECIMAL(10, 2);
-    SELECT Sal INTO EmployeeSalary FROM Employee WHERE Empld = Employee_ID;
-    RETURN EmployeeSalary;
+    DECLARE VoterName VARCHAR(50);
+    SELECT Votername INTO VoterName FROM Voter WHERE Voterld = Voter_ID;
+    RETURN VoterName;
 END;
 //
 DELIMITER ;
 
--- f) Create a procedure to print the details of the production department.
+-- f) Create a procedure to print the booth details in location "north".
 DELIMITER //
-CREATE PROCEDURE PrintProductionDepartment()
+CREATE PROCEDURE PrintNorthBooths()
 BEGIN
-    SELECT * FROM Dept WHERE Dname = 'Production';
+    SELECT * FROM Booth WHERE Location = 'north';
 END;
 //
 DELIMITER ;
+
 
 
 =================================
