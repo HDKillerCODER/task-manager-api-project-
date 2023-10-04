@@ -1,3 +1,66 @@
+-- Create Customer table
+CREATE TABLE Customer (
+    Custid INT PRIMARY KEY,
+    Custname VARCHAR(50),
+    Age INT,
+    Phone VARCHAR(15)
+);
+
+-- Create Loan table
+CREATE TABLE Loan (
+    Loanid INT PRIMARY KEY,
+    Amount DECIMAL(10, 2),
+    Custid INT,
+    EMI DECIMAL(10, 2),
+    FOREIGN KEY (Custid) REFERENCES Customer(Custid)
+);
+
+-- Create Account table
+CREATE TABLE Account (
+    Acno INT PRIMARY KEY,
+    Custid INT,
+    Balance DECIMAL(10, 2),
+    FOREIGN KEY (Custid) REFERENCES Customer(Custid)
+);
+
+-- a) List the Loanid of Loans with EMI more than Rs.50,000.
+SELECT Loanid FROM Loan WHERE EMI > 50000;
+
+-- b) List the EMI and number of loans with that loan amount.
+SELECT EMI, COUNT(*) AS LoanCount FROM Loan GROUP BY EMI;
+
+-- c) Create a view to list the total number of loans availed.
+CREATE VIEW TotalLoans AS
+SELECT Custid, COUNT(*) AS LoanCount FROM Loan GROUP BY Custid;
+
+-- d) Display the EMI amount of Customer "Smith".
+SELECT l.EMI FROM Loan l
+JOIN Customer c ON l.Custid = c.Custid
+WHERE c.Custname = 'Smith';
+
+-- e) Create a procedure to print the Amount and Custid of Loanid 1001.
+DELIMITER //
+CREATE PROCEDURE GetLoanAmount(IN Loan_ID INT)
+BEGIN
+    SELECT Amount, Custid FROM Loan WHERE Loanid = Loan_ID;
+END;
+//
+DELIMITER ;
+
+-- f) Create a function to display the loan amount of customer with customerid 100.
+DELIMITER //
+CREATE FUNCTION GetLoanAmountByCustomerID(Customer_ID INT)
+RETURNS DECIMAL(10, 2)
+BEGIN
+    DECLARE LoanAmount DECIMAL(10, 2);
+    SELECT Amount INTO LoanAmount FROM Loan WHERE Custid = Customer_ID;
+    RETURN LoanAmount;
+END;
+//
+DELIMITER ;
+
+
+=================================
 SELECT A.Title AS AlbumTitle, COUNT(T.TrackId) AS NoOfTracks
 FROM Album A
 LEFT JOIN Track T ON A.AlbumId = T.AlbumId
