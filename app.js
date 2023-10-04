@@ -1,60 +1,67 @@
--- Create Customer table
-CREATE TABLE Customer (
-    Custid INT PRIMARY KEY,
-    Custname VARCHAR(50),
-    Age INT,
-    Phone VARCHAR(15)
+-- Create Employee table
+CREATE TABLE Employee (
+    Empld INT PRIMARY KEY,
+    Empname VARCHAR(50),
+    Sal DECIMAL(10, 2),
+    Deptno INT
 );
 
--- Create Loan table
-CREATE TABLE Loan (
-    Loanid INT PRIMARY KEY,
-    Amount DECIMAL(10, 2),
-    Custid INT,
-    EMI DECIMAL(10, 2),
-    FOREIGN KEY (Custid) REFERENCES Customer(Custid)
+-- Create Dept table
+CREATE TABLE Dept (
+    Deptno INT PRIMARY KEY,
+    Dname VARCHAR(50),
+    Loc VARCHAR(50),
+    Deptmanagerld INT
 );
 
--- Create Account table
-CREATE TABLE Account (
-    Acno INT PRIMARY KEY,
-    Custid INT,
-    Balance DECIMAL(10, 2),
-    FOREIGN KEY (Custid) REFERENCES Customer(Custid)
+-- Create EmpDept table
+CREATE TABLE EmpDept (
+    Empld INT,
+    Deptno INT,
+    FOREIGN KEY (Empld) REFERENCES Employee(Empld),
+    FOREIGN KEY (Deptno) REFERENCES Dept(Deptno)
 );
 
--- a) List the Loanid of Loans with EMI more than Rs.50,000.
-SELECT Loanid FROM Loan WHERE EMI > 50000;
+-- a) List the Department number and Employee count of each department.
+SELECT d.Deptno, COUNT(e.Empld) AS EmployeeCount
+FROM Dept d
+LEFT JOIN EmpDept ed ON d.Deptno = ed.Deptno
+LEFT JOIN Employee e ON ed.Empld = e.Empld
+GROUP BY d.Deptno;
 
--- b) List the EMI and number of loans with that loan amount.
-SELECT EMI, COUNT(*) AS LoanCount FROM Loan GROUP BY EMI;
+-- b) List the employeename, department number, and the salary of all the employees.
+SELECT e.Empname, ed.Deptno, e.Sal
+FROM Employee e
+JOIN EmpDept ed ON e.Empld = ed.Empld;
 
--- c) Create a view to list the total number of loans availed.
-CREATE VIEW TotalLoans AS
-SELECT Custid, COUNT(*) AS LoanCount FROM Loan GROUP BY Custid;
+-- c) Create a view to display the Department name in which "Rani" is working.
+CREATE VIEW RaniDepartment AS
+SELECT d.Dname
+FROM Dept d
+JOIN EmpDept ed ON d.Deptno = ed.Deptno
+JOIN Employee e ON ed.Empld = e.Empld
+WHERE e.Empname = 'Rani';
 
--- d) Display the EMI amount of Customer "Smith".
-SELECT l.EMI FROM Loan l
-JOIN Customer c ON l.Custid = c.Custid
-WHERE c.Custname = 'Smith';
+-- d) Display the Department number of Manufacturing department.
+SELECT Deptno FROM Dept WHERE Dname = 'Manufacturing';
 
--- e) Create a procedure to print the Amount and Custid of Loanid 1001.
+-- e) Create a function to return the salary of the employee when Empid is given as input parameter.
 DELIMITER //
-CREATE PROCEDURE GetLoanAmount(IN Loan_ID INT)
+CREATE FUNCTION GetEmployeeSalary(Employee_ID INT)
+RETURNS DECIMAL(10, 2)
 BEGIN
-    SELECT Amount, Custid FROM Loan WHERE Loanid = Loan_ID;
+    DECLARE EmployeeSalary DECIMAL(10, 2);
+    SELECT Sal INTO EmployeeSalary FROM Employee WHERE Empld = Employee_ID;
+    RETURN EmployeeSalary;
 END;
 //
 DELIMITER ;
 
--- f) Create a function to display the loan amount of customer with customerid 100.
+-- f) Create a procedure to print the details of the production department.
 DELIMITER //
-CREATE FUNCTION GetLoanAmountByCustomerID(Customer_ID INT)
-RETURNS DECIMAL(10, 2)
+CREATE PROCEDURE PrintProductionDepartment()
 BEGIN
-    DECLARE LoanAmount DECIMAL(10, 2);
-    SELECT Amount INTO LoanAmount FROM Loan WHERE Custid = Customer_ID;
-    RETURN LoanAmount;
+    SELECT * FROM Dept WHERE Dname = 'Production';
 END;
 //
 DELIMITER ;
