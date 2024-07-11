@@ -1,167 +1,54 @@
-Bank Application:
+
+Goal 1: Job responsibility
+
+Description
+1) Ensure all the tickets are assigned, updated and closed within SLA.
+2) Work on process improvements for permanent fixes for existing problem tickets wherever applicable.
+3) Escalate any code components/integration issues to the development/project teams on a timely manner so that it can be resolved. Follow up with the teams for resolution.
+4) Completing the flow diagrams and updating all support documents.
+5) Strong change process, reviews and avoid change related incidents
+
+
+Goal 2: Learning & Development
+
+Description: 
+1) Complete SRE Training/Certification and contribute towards SRE Transformation
+2) "T" Shaped skills, UpSkilling and Cross Skilling
+3) Focus on upgrading Skills and Complete Certification courses related Job Responsibility
+4) Improve End to End Ownership and Capability
+5) Continued focus on Leadership Development, Manager Excellence and Career Development
+6) Attend training/Coaching for 40 hours apart from Mandatory Regulatory training
+7) Create avenues of collaboration between teams
+
+
+Goal 3: Risk & Compliance
+
+Description
+Manage risk and compliance to Zero outstanding issues
+
+
+Goal 4: SRE Transformation & World Class Efficiency
+
+Description
+1) SRE driven Ticket reduction by 20%.  Ticket Pattern Aanlysis and Reduce 20% of BAU Tickets using Self Service/Automation/Procedural/KM
+2) Complete SRE Training and Certification
+3) Identify and reduce TOILs by and Contribute to Automation Hours
+4) Build >5 client facing Self-service solutions
+5) Drive Innovation through process efficiency
+6) Reduce MTTD by 20% using Observabilty Principles
+7) CICD automations to accelerate release delivery
+8) Expand Harness Release orchestration tool and achieve reduction in deployment errors
+
+Goal 5: Zero Client Disruption & Client Experience
+
+Description
+1) 80% of major EIM incidents detected by FIS Vs. Client reported
+2) 70% of Non EIM Incident tickets resolved within 15 days
+3) Reduce YoY major incident impacts by 25%, progress measured vs. prior year actuals and tracked monthly and quarterly
+4) Reduce YoY major incident MTTR by 25%, progress measured vs. prior year actuals and tracked monthly and quarterly
+5) Service Tickets Ageing should not exceed 20 days.
+6) Reduce Change Caused incidents by 25%
+7) Reduce EIM Incidents due to Application Operations by 25%
+
 
  
-
- 
-
-1.Account Details :This Module will consist of all the details which the user had entered during the time of registration.
-
-It will include fields such as Name, Mobile Number, Email ID,Aadhar Card Number, Date of Birth,password. It will also contain The Residential Address and Permanent address and other fields if required. Including Occupational Details entered by the user. This is particularly useful in case the user wants to change or update any of his credentials.
-
- 
-
- 
-
-Account Summary page: This page will contain all the financial details of the user in a summarised form. The page will display the account number, balance and recent transactions
-
- 
-
-AccountStatement page: The Account Statement Page will consist of a table that contains the columns like Account Number,Name,Account Type and Balance. To view the account statement during a specified time the user needs to select two dates and click on the submit button. The output will display a table with all the required information.
-
- 
-
-Change Password Page: If the user wishes to change his password due to security reasons, he/she can click on the change password button. Upon clicking this button(Option), the user will have to enter his new Login and Transaction password.
-
- 
-
- 
-
-Fund Transfer
-
-The following module has two buttons which redirects the user to respective page.
-
- 
-
-Add Payee page
-
-Payee page includes adding a new payee or beneficiary. The user must enter the beneficiary name, beneficiary’s account number and confirm the same. In order to save the beneficiary’s details the user must click on save beneficiary. The field for nickname is optional.
-
-Fund Transfer page
-
-There are three modes for transferring the amount to the beneficiary’s account. They are –
-
-1.Through NEFT
-
-2. Through RTGS
-
-3. Through IMPS
-
- 
-
-1.Through NEFT:  In order to initiate the payment through NEFT the user needs to fill their account number, the account number to which they want to transfer the amount and the amount they want to transfer. They can also add a new payee which will redirect them to add payee’s page.
-
- 
-
-2.Through RTGS:   In order to initiate the payment through RTGS the user needs to fill their account number, the account number to which they want to transfer the amount and the amount they want to transfer. They can also add a new payee which will redirect them to add payee’s page.
-
- 
-
-Through IMPS: In order to initiate the payment through IMPS the user needs to fill their account number, the account number to which they want to transfer the amount and the amount they want to transfer. They can also add a new payee which will redirect them to add payee’s page.
-Print Transactions module should print all the transactions based account number
-Deposit and withdraw are basic operations
-
- 
-
- 
-
-Core Java Expected Sample using collections
-
- 
-
-Account Class Sample Properties
-
-Transaction Class Sample Properties
-
- 
-
- 
-
-Note : Add necessary classes and functionalities and improvise  based on understanding and time availability.
-
- 
-
-
-
-
-// const express = require("express");
-// const app = express();
-
-// //install express in every folder for running app.methods()
-// const mongodb = require("mongodb");
-// const MongoClient = mongodb.MongoClient; // connecting to the client
-// // const ObjectID = mongodb.ObjectID;
-// // const id = new ObjectID();  create new object id which we can assign to the documents
-// // console.log(id);
-
-// const ConnectionUrl = "mongodb://localhost:27017"; // setting up the connection 
-// const databaseName = "task-manager";
-
-// MongoClient.connect(ConnectionUrl, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
-//     if(error)
-//     return console.log("Error: error");
-    
-//     const db = client.db(databaseName);
-//     // database is a collection of collections which consists of documents
-
-//     // db.collection('users').insertOne(
-//     //     {
-//     //         _id: id,
-//     //         name: "harsh",
-//     //         age: 17
-//     //     }, (error, result) => {
-//     //         if(error)
-//     //         return console.log("error");
-//     //         console.log(result.ops);
-//     //     }
-//     // )
-
-//     // deleting the doc with age 18 using delete
-//     // db.collection('users').deleteOne({age: 18})
-
-//     //deleting the docs with age 18 using deleteMany
-//     // db.collection('users').deleteMany({age: 18});
-
-//     // db.collection('users').insertMany([
-//     //     {
-//     //         name: "harsh",
-//     //         age: 18
-//     //     },
-//     //     {
-//     //         name: "vansh",
-//     //         age: 16
-//     //     }
-//     // ], (error, result) => {
-//     //     if(error)
-//     //     return console.log(error);
-//     //     console.log(result.ops)
-//     // })
-
-
-//     // if we provide invalid data to search for in the database then it will log null
-//     // db.collection('users').findOne({name: "harshit"}, (error, result) => {
-//     //     if(error)
-//     //     return console.log("error");
-//     //     console.log(result);
-//     // });
-
-//     // find multiple documents cursor has the option for multiple fields
-//     // db.collection('users').find({name: "harsh"}).toArray((error, user) => {
-//     //     if(error)
-//     //     return console.log(error);
-//     //     console.log(user);
-//     // })
-
-//     // db.collection('users').find({name: "vansh"}).count( (error, count) => {
-//     //     if(error)
-//     //     return console.log(error);
-//     //     console.log(count);
-//     // })
-
-//     db.collection('users').updateOne({name: "harsh"}, {$set: {name: "dk"}})
-
-// }) 
-
-
-// app.listen(27017, () => {
-//     console.log("Server started successfully");
-// })
