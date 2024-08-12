@@ -28,6 +28,7 @@ FIS no longer call the client with CheckOOBStatus.  Instead, the client when the
  	  
 Current solution: 
  
+<img width="523" alt="image" src="https://github.com/user-attachments/assets/0b12dda7-974d-4bee-8ad4-f9749b6ea2cf">
 
 1.	Customer makes eCommerce purchase on retailer site 
 2.	RSA deem authorisation worthy of customer-identity-challenge 
@@ -41,7 +42,9 @@ OOB 	1. RSA SMS OTP to customer using data returned on FetchAvailableAliases and
 5.	FIS send CheckClientOOBStatus APIs to Client until the transaction has completed 
  	 
 Upgraded solution: 
- 
+
+
+
 1.	Customer makes eCommerce purchase on retailer site 
 2.	RSA deem authorisation worthy of customer-identity-challenge 
 3.	RSA send FetchAvailableAliases API to FIS, and FIS respond with parameterised Aliases from P1C Customer selects: 
