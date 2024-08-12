@@ -61,6 +61,9 @@ SMS
 Please also refer to CC5781 and CC5990 when estimating. 
  	 
 High Level Design/Proposed Solution 
+
+https://private-user-images.githubusercontent.com/54568472/356958602-e1fb505e-8016-404f-b43f-ddb7e15b47ca.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjM0NDY1NzgsIm5iZiI6MTcyMzQ0NjI3OCwicGF0aCI6Ii81NDU2ODQ3Mi8zNTY5NTg2MDItZTFmYjUwNWUtODAxNi00MDRmLWI0M2YtZGRiN2UxNWI0N2NhLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA4MTIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwODEyVDA3MDQzOFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWJhYTMwMzUwYzAwYzJkMjUyZTYyODk0YTdjYzU2YzBlZTE0NDNhNzU2YjYwYzdjNTVhZjZhYzE2ZWY3NDJkOGUmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.g6RfmpTAi19t9GCYpeqQ-ypnaFNgVqY-e5OxtCQTrM8
+
 Solution Overview: 
 A Secure Customer Authentication database and screens will be created in P1C to support maintenance and inquiry of eCommerce purchases status of a cardholder.   
 •	When RSA sends InitiateOOB API, add request will be triggered by Infinity Connect via a new service link request to P1C. The request will be created with status set to ‘Pending’.  
