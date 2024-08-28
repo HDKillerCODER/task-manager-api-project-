@@ -1,55 +1,13 @@
-Destination port from (10.236.248.21)
-100.83.60.222
-port 9390 9326 8390; 8391; 9391; 9327; 8381; 8382 (failed)
-100.82.188.82
-9390; 9326; 8390; 8391; 9391; 9327; 8381; 8382 (failed)
-100.83.60.219
-9490; 9427; 8480; 8481; 9391; 8381; 8382(failed)
-100.83.60.220
-9490; 9427; 8480; 8481; 9391; 8381; 8382(failed)
-100.82.188.80
-9490; 9427; 8480; 8481; 9391; 8381; 8382 (failed)
-100.82.188.81
-9490; 9427; 8480; 8481; 9391; 8381; 8382 (failed)
- 
- 
-Destination port  from (10.236.247.10)
- 
-100.83.60.222 
-port 9390; 9326 ;8390; 8391 ;9391; 9327; 8381; 8382
- 
-100.82.188.82
-port 9390; 9326; 8390; 8391; 9391;9327; 8381;8382
- 
-100.83.60.219
-port 9490; 9427;8480;8481; 9391; 8381; 8382
- 
-100.83.60.220
-port 9490; 9427; 8480; 8481; 9391;8381; 8382
- 
-100.82.188.80
-port 9490; 9427; 8480; 8481; 9391; 8381; 8382
- 
-100.82.188.81
-port 9490; 9427; 8480; 8481; 9391; 8381; 8382
- 
- 
-Destination port  from (10.236.248.20)
- 
-100.83.60.222 
-port 9390; 9326 ;8390; 8391 ;9391; 9327; 8381; 8382
- 
-100.82.188.82
-port 9390; 9326; 8390; 8391; 9391;9327; 8381;8382
- 
-100.83.60.219
-port 9490; 9427;8480;8481; 9391; 8381; 8382
- 
-100.83.60.220
-port 9490; 9427; 8480; 8481; 9391;8381; 8382
- 
-100.82.188.80
-port 9490; 9427; 8480; 8481; 9391; 8381; 8382
- 
-100.82.188.81
-port 9490; 9427; 8480; 8391; 8481; 9391; 8381; 8382
+This document summarizes the architecture and flow of ACS or Authnet Control Systems, a monitoring tool designed by Authnet team to monitor the health and activities of the Authnet platform
+
+Authnet Control Systems
+ACS., aka Authnet Control System is used to monitor flow of transaction across communication lines and/or authorize network. By communication lines I mean to say here the input from which Authnet Network starts to receive transactions. ACS doesn’t limit to monitor traffic of Visa and Master Card communication line, but also it has its capability to let know if the communication lines are in healthy state or not by color coding.
+ACS monitors not only communication lines but also the flow of messages from Authnet to outside applications inclusive of OnDot, Falcon, etc. 
+BDOC and Littlerock bastions both independently hosts an instance of ACS monitoring tool. The traffic received is load balanced and is diverted to LR or BDOC based on Load balancer algorithms. Both sites work independently of one another. A transaction may fall to LR and other may come to BDOC. 
+Every individual working on ACS may have to create an instance for him, (as in a folder under his name) over the bastions wherein all files for ACS are copied into. It could be a possibility, many resources working on a bastion and pulling ACS from one single path may cause a bit latency. It’s better to create a copy of your own and always access ACS from the folder over the bastion that you created.
+Location where ACS is hosted:
+•	D:\Gateway
+•	GwActivityScreen.exe (this is the gateway activity monitoring tool for Littlerock)
+•	As I mentioned above, create your own folder on D drive and copy all files from D:\Gateway to your local folder like I did in below snapshot:
+
+
