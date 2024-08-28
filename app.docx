@@ -10,4 +10,114 @@ Location where ACS is hosted:
 •	GwActivityScreen.exe (this is the gateway activity monitoring tool for Littlerock)
 •	As I mentioned above, create your own folder on D drive and copy all files from D:\Gateway to your local folder like I did in below snapshot:
 
+<img width="561" alt="image" src="https://github.com/user-attachments/assets/d70ac1d9-08fc-43d4-96fc-f2884d26829e">
+
+This will let you access ACS monitor tool from your own instance. As part of the session, Gokul told me to copy above files from his folder (D:\gokul\Monitor\ACS – LTR)
+Location where RDP connections for Prod.local are hosted:
+•	D:\LittleRock - Prod.local
+To access production littlerock servers, we need to raise a dash request accompanied by a change ticket. Every 14th day we got to raise a change ticket so that 14 days access to production servers is granted.
+At this point of time Gokul is not sure if a permanent access to production servers will be given to Support people.
+
+Create a shortcut for ActivityMonitor.exe at your desktop so that it will come handy when you immediately want to open the tool without going to path.
+
+
+<img width="573" alt="image" src="https://github.com/user-attachments/assets/b61cb393-ed11-4d0a-b00a-7dfa299bd34e">
+
+Once the shortcut is created, double click on new shortcut icon, you will be presented with below screen:
+
+<img width="477" alt="image" src="https://github.com/user-attachments/assets/0cbdd41d-b666-4817-b677-186931f23f33">
+
+Let’s take a walkthrough of ACS monitor screen in parts:
+Tabs:
+
+
+We have six tabs as shown above:
+•	First two tabs corresponds to Communication Servers.
+•	Third and Fourth tab corresponds to Application Server.
+•	Fifth tab is a sql server tab.
+•	Last tab is a utility server.
+
+
+Understanding information contained in CS21L and CS22L tab:
+•	We have TCP connection going outside for an instance Visa, MasterCard, IFSA, etc., through these TCP connections we’ll be getting transactions in our communication servers. The first column ProcID depicts the TCP connections. Every group of line connects to same IP and code. For an instance, 8 visa lines, even though they are on different communication servers, they’ll be connecting to same IP.
+•	We have overall 8 visa TCP connection lines, 4 in CS21L and 4 in CS22L. VS01/02/05/06 resides on CS21L and VS03/04/07/08 resides on CS22L.
+•	We have one MasterCard TCP connection line in each of CS21L and CS22L.
+•	Similarly, we have eight IFSA lines, four in each Communication servers.
+•	Two BCF lines one in each communication server.
+•	We have other lines as well which are running inside the communication server to facilitate other transactions, for an instance, four SF line (Store and Forward) two in each communication server. These SF connections are the one that goes out from the Authnet to the gateways. By gateways we mean the issuers. We have some 300 issuers/credit unions which are used by card holders. To ensure guaranteed delivery, we have a mechanism of Store and Forward. What SF will do is, in case of an issue with Credit Union/Issuers, we’ll do the transaction processing from our end; once the issue is rectified, authorize will send the transaction over SF lines to Issuers/Credit Union. The line SF01 and SF04 in CS21L denotes two SF servers LITISSF21AN and LITISSF22AN at LRK.
+The SF servers hosted at LRK doesn’t have a mirror server at BDOC, both the sites connect to SF servers hosted at LRK.
+LITISSF21AN and LITISSF22AN have different set of clients. Let’s say, SF21 has 100 clients, then SF22 is going to have remaining 200 clients. Some connections will be from SF21 and some connections will be through SF22.
+
+Understanding Key Columns in ACS:
+Once you click on Tab, ACS will present you with a grid. The grid has few columns out of which we have few key columns that we are going to discuss here please see the snapshot below:
+ 
+•	InCnt: In Count displays the messages that we are getting from communication lines.
+•	OutCnt: This displays the number of messages leaving out from authorize.
+•	DiffCnt: This displays the difference between the number of messages we received and the number of messages leaving authorize. If the DiffCnt number starts increasing, then there is a issue and have to be taken a look into.
+•	ExcCnt: Exception count displays the exception happening with the message, for an instance, there’s a bad data in message or there’s an error in message then ExcCnt will start to increase.
+Communication server will perform some basic processing on the message and puts it into a queue. Then application server comes into the picture.
+
+Understanding AP21L and AP22L tab:
+There are two tabs AP21L and AP22L tab that corresponds to Application server. We have different set of applications running in application server.
+
+
+<img width="493" alt="image" src="https://github.com/user-attachments/assets/013a4945-09a9-4a71-bd25-587c46a368f7">
+•	AUT1/2/4/5/6: The main component of Application server is the Authorize engine and we have ten instances of authorize engines, five running in each application server.
+•	BLD1/2: We have build thread which is responsible for building messages, output messages, and routing it to different kind of gateways and routing back response of the gateways to the n/w etc.
+•	PVS1: This is parsing thread for Visa.
+•	PMC1: This is the parsing thread for Mastercard.
+•	B241: Base 24 stands for BCFS. This thread received data from BCF1 line in communication server.
+•	PGW1: This is the thread for parse gateway. This thread is responsible for processing response received from the gateway. This serves as a input point for the messages coming from gateway/ Parse gateway picks up the message, processes it and send it back to Authorize.
+•	PVA1: Parse VA is a type of voice authorization messages.
+•	PIH1: Parse In-house is another type of messages that we receive from mainframe. We have some web systems through which we receive messages as well that also comes to Parse-In-house
+•	PEF1: This stands for Parse EF and pertains to IFSA messages. IFSA is basically a switch owned by eFunds.
+•	Suppose a transaction has come to Visa queue in communication line, PVS1 (Visa parser queue) will pick up the message and will do the parsing. Once parsing is done by Visa parser queue, then message is put in Authorize queue (denoted by AUT1/2/3/4/5). After authorize queue, message is put into Build queue (BLD1/2) then to the SF queue. SF queue will see what card that is and on based of that it will send it out.
+•	If the DiffCnt in SF queue started to rise, then we don’t have to worry. It could be because of gateway being down. Since we are Stand-In for Issuers, that won’t cause any trouble to us. Once the gateway is up, DiffCnt should come down to normal.
+•	MTRT: We don’t use MTRT queue, so we don’t have to monitor it. 
+•	OD01/02: We have some auxiliary application to which Authnet connects to. OD01/02 stands for OnDot application. OnDot is an application where clients can create checks, for an instance, a person doesn’t want to spend more than 100$ at a grocery store. Here is when OnDot comes into picture and perform the checking. OnDot also comes into picture when a new card activation is happening.
+•	FLC: Its stands for Falcon. Falcon is an application that does fraudulent detection for the transaction. Falcon does fraudulent detection based on score that has been set. Based on the response of Falcon Authnet proceeds and send out the transaction message to OnDot followed by sending message to Gateway
+•	EXSE, FPCA, FMQS: ExtractSender, FirstPinCardActivation, FalconMQSender, these are the auxiliary applications to Authorize. All these three applications send out messages to Mainframe. ExtractSender application extract data from the message and save it to mainframe so that the data can be used by web application and can be displayed to user. It’s mainly for the reporting purpose.
+
+Understanding SQxxL Tab:
+Majority of application are kind of based on FTP. We get daily downloads from mainframe. Since Authnet works as a Stand-in for Gateways, we need to store Balance data. This balance data we receive from the Gateway every night and we store that. There are other files that we receive. Authnet process those files and loads them into database.
+
+Color coding of line:
+RED—An issue has occurred with the line and needs to consider. Sometimes, the red line will fade away with the next refresh scheduled after 10 seconds. This could be because of application intermittent glitch. If red line is not fading away, teams need to remediate the problem.
+YELLOW: This could be due to lines not able to connect to gateway, etc.
+AQUA: This means that none transaction has happened in past five minutes in the said queue.
+
+>> If the GWs data is not showing in tool, then follow the below steps:
+
+1. Fetch the Service Account password from Cyberark using ticket number provided for this issue.
+2. Login in the corresponding server using Service Account.
+3. Kill the both 2 process for GW_stat.exe*32 in Task Manager if they exist from prior.
+4. Start the "GWStats_Both" batch script located in E\A_Gateway
+
+Then it will show the data in tool.
+
+
+>> Steps to provide log file for Authnet Lines:
+
+1. Turn On the logging for requested time period for requested Site/Line. Turn Off the logging after that time.
+2. Go to corresponding Server path C:\A_TCP\Log folder and find the latest file for that Line (file name: Trace*.logE). Zip the file and copy it.
+3. Paste the zipped file in Folder say folderX to server STCQSGA01AN(10.7.5.62) only as this server has Parsers.
+4. Now paste the unzipped Log file Trace*.logE in server in C:\Parser folder as this file is encrypted.
+5. For decrypting the file, there are two steps as below-
+5.1 Drag the file Trace*.logE in "AciTrParse_Decode.bat" file, this will create file Trace*.txt.
+5.2 Now drag the file Trace*.txt in "AciTrParse.bat" file, this will create file XTrace.txt.
+6. Put files Trace*.txt in decrypt folder and XTrace.txt in parser folder in the folderX and share the path.
+
+
+>>If the Card.Midrange.Support team sends email for getting these Balance Transfer Authnet error emails with below subject line-
+ALERT : Balance Transfer Authorization reported a ERROR message
+
+--Then Action point is as below-
+On LTR side-
+Kill AM_ParseVA.exe in task manager of both AP21 and AP22.
+Kill ARCOTBR.exe in UT22.
+On BDOC side-
+Kill AM_ParseVA.exe in task manager of both AP01 and AP02.
+Kill ARCOTBR.exe in UT02.
+
+Then, send email to that team to check.
 
