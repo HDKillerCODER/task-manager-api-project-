@@ -1,12 +1,9 @@
-index="infinity_connect_p1c1" (source="/usr/app/xesmpcprd/logs/xpressNgLog.txt" OR source="/opt/xpress/was/profiles/AppSrvMPCPRD/logs/serverMPCPRD/startServer.log" OR source="/opt/xpress/was/profiles/AppSrvMPCPRD/logs/serverMPCPRD/stopServer.log" OR source="/opt/xpress/was/profiles/AppSrvMPCPRD/logs/serverMPCPRD/SystemErr.log")
+index="infinity_connect_p1c1" (source="/opt/xpress/was/profiles/AppSrvMPCPRD/logs/serverMPCPRD/startServer.log" OR source="/opt/xpress/was/profiles/AppSrvMPCPRD/logs/serverMPCPRD/stopServer.log" OR source="/opt/xpress/was/profiles/AppSrvMPCPRD/logs/serverMPCPRD/SystemErr.log")
 | eval event_type=case(
-    match(_raw, "500"), "HTTP 500 Error",
     source="/opt/xpress/was/profiles/AppSrvMPCPRD/logs/serverMPCPRD/startServer.log", "Server Start",
     source="/opt/xpress/was/profiles/AppSrvMPCPRD/logs/serverMPCPRD/stopServer.log", "Server Stop",
     source="/opt/xpress/was/profiles/AppSrvMPCPRD/logs/serverMPCPRD/SystemErr.log" AND match(_raw, "restart"), "Server Restart",
     true(), "Other"
 )
-| where event_type="HTTP 500 Error" OR event_type="Server Restart"
-| timechart span=1h count(eval(event_type="HTTP 500 Error")) as HTTP_500_Error_count count(eval(event_type="Server Restart")) as restart_count
-| eval restart_related_errors=if(restart_count > 0, HTTP_500_Error_count, 0)
-| table _time HTTP_500_Error_count restart_count restart_related_errors
+| where event_type="Server Start" OR event_type="Server Stop" OR event_type="Server Restart"
+| table _time event_type source _raw
