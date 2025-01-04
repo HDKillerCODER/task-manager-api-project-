@@ -1,118 +1,18 @@
-Goal
-Goal
-Job Responsibilities
-Description
-Description
-1) Ensure all the tickets are assigned, updated and closed within SLA.
-2) Work on process improvements for permanent fixes for existing problem tickets wherever applicable.
-3) Escalate any code components/integration issues to the development/project teams on a timely manner so that it can be resolved. Follow up with the teams for resolution.
-4) Completing the flow diagrams and updating all support documents.
-5) Strong change process, reviews and avoid change related incidents
+Enhanced Dashboard Visualization for Improved Monitoring:
+One of my key contributions was transforming the MPC API dashboard by converting a static data table into an insightful, interactive chart. Additionally, I consolidated multiple charts into a single unified view, providing a comprehensive overview of batch status processes, including running, completed, and failed batches. This enhancement not only simplified monitoring but also allowed stakeholders to identify and address potential issues faster, significantly improving operational efficiency.
 
-Due Date
-Due Date
-12/31/2024
-Category
-Category
-8. Worldpay - My Performance
-Status
-Status
-4 - Completed<br><br><br><br><br><br>Goal
-Goal
-Learning & Development
-Description
-Description
-1) Complete SRE Training/Certification and contribute towards SRE Transformation
-2) "T" Shaped skills, UpSkilling and Cross Skilling
-3) Focus on upgrading Skills and Complete Certification courses related Job Responsibility
-4) Improve End to End Ownership and Capability
-5) Continued focus on Leadership Development, Manager Excellence and Career Development
-6) Attend training/Coaching for 40 hours apart from Mandatory Regulatory training
-7) Create avenues of collaboration between teams
+SRE Training and Process Automation Initiatives:
+I successfully completed foundational SRE training and certifications, equipping myself with the skills to support the organization’s SRE transformation. As part of this initiative, I identified opportunities to reduce toil by streamlining repetitive manual tasks. While I’m still in the early stages, I’ve started contributing to automation efforts that align with the goal of increasing efficiency and improving system reliability. These contributions have laid the groundwork for further automation projects in the future.
 
-Due Date
-Due Date
-12/31/2024
-Category
-Category
-7. FIS - My Development - Personal Growth
-Status
-Status
-4 - Completed<br><br><br><br><br>Goal
-Goal
-Risk & Compliance
-Description
-Description
-Manage risk and compliance to Zero outstanding issues
-Due Date
-Due Date
-12/31/2024
-Category
-Category
-6. FIS - My Behavior - How I Work
-Status
-Status
-4 - Completed<br><br><br><br><br><br>Goal
-Goal
-SRE Transformation & World Class Efficiency
-Description
-Description
-1) Complete SRE Training and Certification
-2) Identify and reduce TOILs by and Contribute to Automation Hours
-3) Build >5 client facing Self-service solutions
-4) Drive Innovation through process efficiency
-5) Reduce MTTD by 20% using Observability Principles
-6) CICD automations to accelerate release delivery
-7) Expand Harness Release orchestration tool and achieve reduction in deployment errors
+Detailed Documentation for MPMS Application:
+I took the initiative to create and enhance detailed documentation for the MPMS application. This included capturing key processes, configurations, and troubleshooting steps in a structured format. The documentation serves as a comprehensive knowledge base, enabling the team to address issues more efficiently and providing a valuable resource for onboarding new team members. This effort has reduced dependency on individuals and ensured smoother day-to-day operations.
 
-Due Date
-Due Date
-12/31/2024
-Category
-Category
-8. Worldpay - My Performance
-Status
-Status
-4 - Completed<br><br><br><br>Goal
-Goal
-Zero Client Disruption & Client Experience
-Description
-Description
-1) 80% of major EIM incidents detected by FIS Vs. Client reported
-2) 70% of Non EIM Incident tickets resolved within 15 days
-3) Reduce YoY major incident impacts by 25%, progress measured vs. prior year actuals and tracked monthly and quarterly
-4) Reduce YoY major incident MTTR by 25%, progress measured vs. prior year actuals and tracked monthly and quarterly
-5) Service Tickets Ageing should not exceed 20 days.
-6) Reduce Change Caused incidents by 25%
-7) Reduce EIM Incidents due to Application Operations by 25%
+Summary Comments Reflecting the Top 3 Development Areas
+Hands-On Experience with Incident Management:
+While I’ve focused on improving dashboards and documentation, I need to build more hands-on experience in managing and resolving tickets. Working directly on incidents will allow me to better understand the challenges in meeting SLAs and improve my ability to contribute effectively to incident resolution. Gaining this experience will also help me anticipate and mitigate potential issues more proactively.
 
-Due Date
-Due Date
-12/31/2024
-Category
-Category
-3. FIS - CEO Goals - Protect our Business
-Status
-Status
-4 - Completed<br><br><br><br><br>these above are my approved goals although with the gpt recommendation i have written those in mid year and now marked as complete by me. tbh i have not worked on tickets but we are working towards SRE, i am a beginner . write such a  answer that i will be contributing for great work for the organisation <br><br><br><br>Year-End Summary Review (Required)
-Now that you’ve taken time to review your goals and collect feedback, think about your achievements and areas of development. Document your comments below to prepare for your year-end conversation with your manager. ​
+Strengthening Automation Skills:
+To contribute more significantly to the organization’s SRE goals, I aim to deepen my technical expertise in automation. This includes learning advanced tools and frameworks for scripting and deploying automation solutions. By doing so, I will be better equipped to design and implement efficient solutions that reduce manual work, improve system reliability, and accelerate processes like deployment and monitoring.
 
-​
-
-Reflection Points (Overall Summary)​
-
-​
-
-Look Back – Be clear and concise. What did you accomplish? (outcomes) How did you do it? (behaviors) Who benefitted internally or externally and what were the results? ​
-
-​
-
-Look Forward – What actions will you continue to focus on to achieve our CEO goals, objectives and key results (OKRs)? How will you continue to deliver for your clients and drive a great client experience?​
-
-​
-
-My Development - This is about your growth and development. What did you learn when something didn’t go as planned? What do you need to grow your strengths, skills and talents? Discuss with your manger and make a plan together.<br><br>
-Question
-Place your summary comments here reflecting the top 3 achievements.<br><br>Question
-Question
-Place your summary comments here reflecting the top 3 development areas.<br><br>write these two answers in very simple human language that will guarantee that I am useful resouces<br>
+Improving Collaboration Across Teams:
+I recognize the importance of fostering strong collaboration across cross-functional teams. My goal is to improve in this area by actively engaging with team members from different domains, aligning efforts, and taking ownership of projects that span multiple areas. This will ensure smoother communication, better alignment with organizational goals, and more impactful contributions to the overall success of the team.
